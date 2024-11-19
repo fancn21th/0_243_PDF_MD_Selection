@@ -91,6 +91,12 @@ const formatJson = (layerList: ExtractLayerItem[]) => {
   });
 };
 
+// 获取 test_bbox.json
+const getBbox = async () => {
+  const response = await fetch('/sample/test_bbox.json');
+  return  await response.json();
+};
+
 const PDFViewer = ({
   taskInfo,
   onChange,
@@ -117,7 +123,7 @@ const PDFViewer = ({
   };
 
   useEffect(() => {
-    const handleMessage = (event: MessageEvent) => {
+    const handleMessage = async (event: MessageEvent) => {
       if (event?.data?.pageNum) {
         const num = event?.data?.pageNum || 1;
         sendMessageToIframe("pageChange", num);
@@ -134,9 +140,10 @@ const PDFViewer = ({
       if (event?.data?.status) {
         const status = event?.data?.status;
         if (status === "loaded") {
+          const data = await getBbox();
           sendMessageToIframe(
             "initExtractLayerData",
-            formatJson(_layerData?.current as any)
+            formatJson(data?.pdf_info as any)
           );
           sendMessageToIframe("title", "");
         }
