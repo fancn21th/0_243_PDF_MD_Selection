@@ -101,7 +101,8 @@ const PDFViewer = ({
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const _layerData = useLatest(taskInfo?.content);
 
-  const pdfUrl = taskInfo?.url;
+  // const pdfUrl = taskInfo?.url;
+  const pdfUrl = `/sample/test.pdf`;
 
   const sendMessageToIframe = (type: string, message: any) => {
     if (iframeRef.current) {
