@@ -1,9 +1,7 @@
-import { useRef } from "react";
+import PDFViewer from "./components/pdf-viewer";
 
 function App() {
-  const iframeRef = useRef<HTMLIFrameElement>(null);
-
-  return <iframe ref={iframeRef} src={`/helloworld.html`}></iframe>;
+  return <PDFViewer />;
 }
 
 export default App;
