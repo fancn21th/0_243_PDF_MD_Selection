@@ -135,13 +135,21 @@ const useMdStore = create<MdState>((set, get) => ({
         newMdContents[url] = { content, isLoading: false };
       });
 
-      set((state) => ({
-        mdContents: newMdContents,
-        allMdContent: state.getAllMdContent(results.map((i) => i[1])),
-        allMdContentWithAnchor: state.getContentWithAnchors(
+      set((state) => {
+        const allMdContentWithAnchor = state.getContentWithAnchors(
           results.map((i) => i[1])
-        ),
-      }));
+        )
+
+        allMdContentWithAnchor.split("\n\n").forEach((content, index) => {
+          console.log({content, index})
+        })
+
+        return {
+          mdContents: newMdContents,
+          allMdContent: state.getAllMdContent(results.map((i) => i[1])),
+          allMdContentWithAnchor,
+        }
+      });
     }
   },
 
