@@ -5,11 +5,11 @@ import "./App.css";
 
 function App() {
   return  (
-    <div className={cls("main")}>
-      <div className={cls("left")}>
+    <div className={cls("h-full w-full flex")}>
+      <div className={cls("flex-1")}>
         <PDFViewer/>
       </div>
-      <div className={cls("right")}>
+      <div className={cls("flex-1 overflow-auto")}>
         <MdViewer curPage={1} taskInfo={{
           markdownUrl: ["/sample/test.md"],
         }}/>
