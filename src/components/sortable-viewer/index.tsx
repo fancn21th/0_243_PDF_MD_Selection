@@ -3,6 +3,8 @@ import { useDrag, useDrop } from "react-dnd";
 import cls from "classnames";
 
 function DraggableItem({ item, index, moveItem, option }) {
+  console.log({ option });
+
   const [, ref] = useDrag({
     type: "ITEM",
     item: { index },
@@ -21,8 +23,9 @@ function DraggableItem({ item, index, moveItem, option }) {
   return (
     <div
       ref={(node) => ref(drop(node))}
-      className={cls("border p-2 rounded mb-2 bg-white", {
+      className={cls("border p-2 rounded mb-2", {
         "bg-purple-200": option?.text_level === 1,
+        "bg-white": option?.text_level !== 1,
       })}
     >
       {item}
