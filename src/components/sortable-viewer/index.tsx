@@ -4,6 +4,7 @@ import cls from "classnames";
 
 function DraggableItem({ item, index, moveItem, option }) {
   const [editable, setEditable] = useState(false);
+  const [visible, setVisible] = useState(false);
 
   const [, ref] = useDrag({
     type: "ITEM",
@@ -32,10 +33,17 @@ function DraggableItem({ item, index, moveItem, option }) {
         "bg-white": option?.text_level !== 1,
       })}
       contentEditable={editable}
+      onMouseOver={() => setVisible(true)}
+      onMouseOut={() => {
+        setVisible(false);
+      }}
     >
       {item}
       <span
-        className="absolute right-0 top-0 bg-white rounded px-1"
+        className={cls("absolute right-0 top-0 bg-white rounded px-1", {
+          ["visible"]: visible,
+          ["hidden"]: !visible,
+        })}
         onClick={() => setEditable(!editable)}
       >
         编辑
