@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { useDrag, useDrop } from "react-dnd";
+import cls from "classnames";
 
-function DraggableItem({ item, index, moveItem }) {
+function DraggableItem({ item, index, moveItem, option }) {
   const [, ref] = useDrag({
     type: "ITEM",
     item: { index },
@@ -20,7 +21,9 @@ function DraggableItem({ item, index, moveItem }) {
   return (
     <div
       ref={(node) => ref(drop(node))}
-      className="border p-2 rounded mb-2 bg-white"
+      className={cls("border p-2 rounded mb-2 bg-white", {
+        "bg-purple-200": option?.text_level === 1,
+      })}
     >
       {item}
     </div>
@@ -55,6 +58,7 @@ function Sortable() {
           <DraggableItem
             key={index}
             item={item.text}
+            option={item}
             index={index}
             moveItem={moveItem}
           />
