@@ -20,7 +20,7 @@ function DraggableItem({ item, index, moveItem }) {
   return (
     <div
       ref={(node) => ref(drop(node))}
-      style={{ padding: "10px", border: "1px solid black", margin: "5px" }}
+      className="border p-2 rounded mb-2 bg-white"
     >
       {item}
     </div>
