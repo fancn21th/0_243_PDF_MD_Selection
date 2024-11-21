@@ -3,7 +3,7 @@ import { useDrag, useDrop } from "react-dnd";
 import cls from "classnames";
 
 function DraggableItem({ item, index, moveItem, option }) {
-  console.log({ option });
+  const [editable, setEditable] = useState(false);
 
   const [, ref] = useDrag({
     type: "ITEM",
@@ -20,15 +20,26 @@ function DraggableItem({ item, index, moveItem, option }) {
     },
   });
 
+  function onClick() {
+    console.log(index);
+  }
+
   return (
     <div
       ref={(node) => ref(drop(node))}
-      className={cls("border p-2 rounded mb-2", {
+      className={cls("border p-2 rounded mb-2 relative", {
         "bg-purple-200": option?.text_level === 1,
         "bg-white": option?.text_level !== 1,
       })}
+      contentEditable={editable}
     >
       {item}
+      <span
+        className="absolute right-0 top-0 bg-white rounded px-1"
+        onClick={() => setEditable(!editable)}
+      >
+        编辑
+      </span>
     </div>
   );
 }
