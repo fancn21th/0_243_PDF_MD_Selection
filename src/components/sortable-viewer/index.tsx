@@ -21,10 +21,6 @@ function DraggableItem({ item, index, moveItem, option }) {
     },
   });
 
-  function onClick() {
-    console.log(index);
-  }
-
   return (
     <div
       ref={(node) => ref(drop(node))}
@@ -40,13 +36,16 @@ function DraggableItem({ item, index, moveItem, option }) {
     >
       {item}
       <span
-        className={cls("absolute right-0 top-0 bg-white rounded px-1", {
-          ["visible"]: visible,
-          ["hidden"]: !visible,
-        })}
+        className={cls(
+          "absolute right-0 top-0 bg-white rounded px-1 border-blue-500 border",
+          {
+            ["visible"]: visible,
+            ["hidden"]: !visible,
+          }
+        )}
         onClick={() => setEditable(!editable)}
       >
-        编辑
+        {!editable ? "编辑" : "取消编辑"}
       </span>
     </div>
   );
